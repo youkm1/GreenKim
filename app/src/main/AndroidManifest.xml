@@ -17,10 +17,14 @@
         android:theme="@style/Theme.GreenKim"
         tools:targetApi="31">
         <activity
+            android:name=".DetailPostActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".CommunityActivity"
             android:exported="true"
             android:label="@string/title_activity_community"
-            android:theme="@style/Theme.GreenKim"/>
+            android:theme="@style/Theme.GreenKim" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -34,10 +38,10 @@
         </activity>
         <activity
             android:name=".PostActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".CheckPostActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>
