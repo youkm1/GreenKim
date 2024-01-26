@@ -6,6 +6,6 @@ import android.os.Bundle
 class MyPageActivity1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page)
+        setContentView(R.layout.activity_my_page1)
     }
 }

@@ -20,6 +20,13 @@ class SettingActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            val intent = Intent(applicationContext, WithdrawActivity::class.java)
+        }
+
+
+
         val textView1: TextView = findViewById(R.id.textView1)
         val switchView: SwitchCompat = findViewById(R.id.switchView1)
 
@@ -58,11 +65,6 @@ class SettingActivity : AppCompatActivity() {
 
 
 
-        val testButton3: Button = findViewById<Button>(R.id.button5)
-        testButton3.setOnClickListener {
-            val nextIntent = Intent(this, NewPWActivity::class.java)
-            startActivity(nextIntent)
-        }
 
 
 

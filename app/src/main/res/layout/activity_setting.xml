@@ -22,6 +22,8 @@
         app:title="환경설정" />
 
 
+
+
     <!--Button
         android:layout_width="match_parent"
         android:layout_height="38dp"
@@ -233,17 +235,7 @@
         android:textColor="#A39D9D"
         android:textSize="15dp" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_marginLeft="8dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="비밀번호 변경"
-        android:textAlignment="viewStart"
-        android:textColor="#000000"
-        android:textSize="17dp"
-        app:cornerRadius="0dp" />
+
 
     <Button
         android:id="@+id/button6"

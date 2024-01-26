@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
+
+
         val textView1: TextView = findViewById(R.id.textView1)
         val switchView: SwitchCompat = findViewById(R.id.switchView1)
 
