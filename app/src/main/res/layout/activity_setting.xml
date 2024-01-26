@@ -24,21 +24,7 @@
 
 
 
-    <!--Button
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:backgroundTint="#FFFFFF"
-        android:onClick="Btn1Click"
-        android:text="안녕            "
-        app:cornerRadius="0dp" /-->
 
-
-    <!--Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:backgroundTint="#379120"
-        app:cornerRadius="0dp" /-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -144,15 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
 
-        <!--androidx.appcompat.widget.AppCompatToggleButton
-            android:id="@+id/toggleButton1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_weight="2"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/toggle_selector"
-            android:checked="false"/-->
+
 
     </LinearLayout>
 

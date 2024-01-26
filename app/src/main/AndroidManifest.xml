@@ -28,10 +28,7 @@
             android:exported="false"
             android:parentActivityName=".SettingActivity"/>
 
-        <activity
-            android:name=".MyPageActivity3"
-            android:exported="false"
-            android:parentActivityName=".SettingActivity"/>
+
 
 
         <!-- 다른 activity 엘리먼트들도 마찬가지로 수정 -->

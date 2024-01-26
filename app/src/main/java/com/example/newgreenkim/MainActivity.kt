@@ -12,10 +12,6 @@ import androidx.appcompat.widget.SwitchCompat
 
 class MainActivity : AppCompatActivity() {
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting);
@@ -37,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val textView2: TextView = findViewById(R.id.textView2)
-        val switchView1: SwitchCompat = findViewById(R.id.switchView1)
+        val switchView2: SwitchCompat = findViewById(R.id.switchView2)
 
         switchView.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -62,11 +58,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val testButton3: Button = findViewById<Button>(R.id.button5)
-        testButton3.setOnClickListener {
-            val nextIntent = Intent(this, NewPWActivity::class.java)
-            startActivity(nextIntent)
-        }
+
 
 
 
