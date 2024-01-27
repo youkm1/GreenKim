@@ -31,8 +31,9 @@ class CommunityActivity : AppCompatActivity() {
         }.attach()
 
         fragmentToLoad?.let {
-            if (it == "ComfirmationFragment") {
-                binding.viewPager.currentItem = 1
+            when (it) {
+                "ConfirmationFragment" -> binding.viewPager.currentItem = 1
+                "ProofFragment" -> binding.viewPager.currentItem = 2
             }
         }
 
