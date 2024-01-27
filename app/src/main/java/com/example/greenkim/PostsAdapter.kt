@@ -1,10 +1,12 @@
-package com.example.greenkim
-
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.greenkim.R
 import com.example.greenkim.databinding.RecyclerviewItemBinding
+import com.example.greenkim.posts
 
 class PostsAdapter : RecyclerView.Adapter<Holder>() {
 
@@ -39,6 +41,8 @@ class Holder(val binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(bin
         binding.Like.setOnClickListener {
             // 좋아요 상태 변경
             post.liked = !post.liked
+            // 좋아요 애니메이션 추가
+            animateLike(post.liked)
             // 좋아요 상태에 따라 이미지 변경
             updateLikeImage(post.liked)
         }
@@ -58,5 +62,18 @@ class Holder(val binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(bin
             binding.Like.setImageResource(R.drawable.baseline_favorite_border_24)
             // 원래의 색상 설정
         }
+    }
+
+    private fun animateLike(liked: Boolean) {
+        // 좋아요 애니메이션 추가
+        val animator = if (liked) {
+            ObjectAnimator.ofFloat(binding.Like, "scaleX", 1f, 1.2f, 1f)
+        } else {
+            ObjectAnimator.ofFloat(binding.Like, "scaleX", 1f, 0.8f, 1f)
+        }
+
+        animator.duration = 300
+        animator.interpolator = AccelerateInterpolator()
+        animator.start()
     }
 }
