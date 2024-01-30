@@ -28,7 +28,7 @@
             android:theme="@style/Theme.GreenKim">
 
         </activity>
-        <activity android:name=".SplashActivity"
+        <activity android:name=".BadgeActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.GreenKim">

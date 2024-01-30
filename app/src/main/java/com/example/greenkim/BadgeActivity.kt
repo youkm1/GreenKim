@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("DEPRECATION")
 class BadgeActivity : AppCompatActivity() {
-    private val profileBadgeList: List<BadgeList> = BadgeList.values().filter { it.isProfileBadge }
-    private val earnedBadgeList: List<BadgeList> = BadgeList.values().filter { it.isEarned }
+    //획득한 뱃지에 Blank 넣어두기
+    private val earnedBadgeList: List<BadgeList> = listOf(BadgeList.ADVENTURER)
     private val unearnedBadgeList: List<BadgeList> = BadgeList.values().filter { !it.isEarned }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,14 +24,6 @@ class BadgeActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             onBackPressed()
         }
-
-        // Profile Badge 설정
-        val profileBadgeRecyclerView: RecyclerView = findViewById(R.id.profile_badge_recycler_view)
-        profileBadgeRecyclerView.layoutManager = GridLayoutManager(this, 5)
-        val profileAdapter = BadgeAdapter(profileBadgeList) { clickedBadge ->
-            showBadgePopup(clickedBadge)
-        }
-        profileBadgeRecyclerView.adapter = profileAdapter
 
         // Earned Badge 설정
         val earnedBadgeRecyclerView: RecyclerView = findViewById(R.id.earned_badge_recycler_view)
@@ -58,10 +50,11 @@ class BadgeActivity : AppCompatActivity() {
 
         val badgeImage = dialog.findViewById<ImageView>(R.id.popup_badge_image)
         val badgeText = dialog.findViewById<TextView>(R.id.popup_badge_text)
-        //val badgeAchievementText = dialog.findViewById<TextView>(R.id.badge_achievement)
+        val badgeAchievementText = dialog.findViewById<TextView>(R.id.badge_achievement)
 
         badgeImage.setImageResource(badgeData.badgeImg)
         badgeText.text = badgeData.badge
+        badgeAchievementText.text=badgeData.badgeAchieve
 
         val closeButton = dialog.findViewById<ImageView>(R.id.popup_close_button)
         closeButton.setOnClickListener {
