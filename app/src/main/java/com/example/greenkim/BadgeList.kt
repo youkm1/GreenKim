@@ -43,13 +43,13 @@ enum class BadgeList (
 
 // RecyclerView 어댑터
 class BadgeAdapter(
-    private val badgeList: List<BadgeList>,
+    var badgeList: List<BadgeList>,
     private val earnedBadgeClickListener: (BadgeList) -> Unit,
     private val unearnedBadgeClickListener: (BadgeList) -> Unit
 ) : RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
 
     // BLANK 항목을 제외한 리스트 생성
-    private val filteredBadgeList = badgeList.filterNot { it == BadgeList.BLANK }
+    private var filteredBadgeList = badgeList.filterNot { it == BadgeList.BLANK }
 
     inner class BadgeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val badgeImg: ImageView = itemView.findViewById(R.id.badge_image)
@@ -83,5 +83,10 @@ class BadgeAdapter(
     override fun getItemCount(): Int {
         return filteredBadgeList.size
     }
-}
 
+    fun updateBadgeList(newBadgeList: List<BadgeList>) {
+        badgeList = newBadgeList
+        filteredBadgeList = badgeList.filterNot { it == BadgeList.BLANK }
+        notifyDataSetChanged()
+    }
+}
