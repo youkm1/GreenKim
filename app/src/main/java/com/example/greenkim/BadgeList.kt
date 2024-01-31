@@ -16,8 +16,8 @@ enum class BadgeList (
     var isEarned: Boolean = false
 ){
     BLANK("",-1, "", R.drawable.ic_launcher_foreground),
-    MENTOR("그린 멘토",5,"질문 카테고리 댓글 n회 작성하기",  R.drawable.mentor),
-    MENTEE("그린 멘티",5,"질문 카테고리 글 n회 작성하기", R.drawable.mentee),
+    MENTOR("그린 멘토",5,"질문 카테고리 댓글 5회 작성하기",  R.drawable.mentor),
+    MENTEE("그린 멘티",5,"질문 카테고리 글 5회 작성하기", R.drawable.mentee),
     EARLYBIRD("얼리버드",3,"오전 9시 이전에 인증글 3회 작성하기", R.drawable.earlybird),
     NORANG("김노랑",10,"인증글 10회 작성하기", R.drawable.norang),
     YEONDU("김연두",20,"인증글 20회 작성하기", R.drawable.yeondu),
@@ -37,13 +37,16 @@ enum class BadgeList (
     ETC_3("아마추어 기타리스트",3,"기타 인증글 3회 작성하기", R.drawable.amateur_guitarist),
     ETC_10("프로 기타리스트",10,"기타 인증글 10회 작성하기", R.drawable.pro_guitarist),
     ADVENTURER("환경 모험가",-1,"각 카테고리별 인증글 1회 작성하기",R.drawable.adventurer),
-    DOCTOR("새싹 김그린",-1,"기타 인증글 10회 작성하기",R.drawable.sprout),
+    DOCTOR("새싹 김그린",-1,"튜토리얼 열람하기",R.drawable.sprout),
     GOLDEN_KIMGREEN("황금 김그린",-1,"모든 뱃지 획득하표",R.drawable.golden_kimgreen)
 }
 
 // RecyclerView 어댑터
-class BadgeAdapter(private val badgeList: List<BadgeList>, private val listener: (BadgeList) -> Unit) :
-    RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
+class BadgeAdapter(
+    private val badgeList: List<BadgeList>,
+    private val earnedBadgeClickListener: (BadgeList) -> Unit,
+    private val unearnedBadgeClickListener: (BadgeList) -> Unit
+) : RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
 
     // BLANK 항목을 제외한 리스트 생성
     private val filteredBadgeList = badgeList.filterNot { it == BadgeList.BLANK }
@@ -67,7 +70,13 @@ class BadgeAdapter(private val badgeList: List<BadgeList>, private val listener:
 
         // 뱃지 클릭 시 해당 뱃지 정보 전달
         holder.itemView.setOnClickListener {
-            listener(currentItem)
+            if (currentItem.isEarned) {
+                // 획득한 뱃지인 경우 대표 뱃지 변경 다이얼로그 표시
+                earnedBadgeClickListener.invoke(currentItem)
+            } else {
+                // 획득하지 않은 뱃지인 경우 뱃지 팝업 표시
+                unearnedBadgeClickListener.invoke(currentItem)
+            }
         }
     }
 
@@ -75,3 +84,4 @@ class BadgeAdapter(private val badgeList: List<BadgeList>, private val listener:
         return filteredBadgeList.size
     }
 }
+
