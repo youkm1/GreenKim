@@ -54,6 +54,23 @@ android {
 }
 
 dependencies {
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    // optional - RxJava2 support
+    implementation ("androidx.datastore:datastore-preferences-rxjava2:1.0.0")
+    // optional - RxJava3 support
+    implementation ("androidx.datastore:datastore-preferences-rxjava3:1.0.0")
+    implementation ("androidx.datastore:datastore-preferences-core:1.0.0")
+
+    implementation ("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.google.code.gson:gson:2.8.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     kapt ("com.github.bumptech.glide:compiler:4.12.0")
