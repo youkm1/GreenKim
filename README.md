@@ -20,4 +20,5 @@
       
 ## 구조도
 
-![클라이언트 구조.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/891ed103-624f-465e-9caf-58e8a27a9879/99362354-0028-454b-9455-0d17e508a198/%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A5%E1%86%AB%E1%84%90%E1%85%B3_%E1%84%80%E1%85%AE%E1%84%8C%E1%85%A9.png)
+
+<img width="722" alt="클라이언트 구조" src="https://github.com/youkm1/GreenKim/assets/77780624/d9a25eaa-a078-4a7d-96b6-8e7c50941d10">
