@@ -48,7 +48,6 @@ class BadgeAdapter(
     private val unearnedBadgeClickListener: (BadgeList) -> Unit
 ) : RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
 
-    // BLANK 항목을 제외한 리스트 생성
     private var filteredBadgeList = badgeList.filterNot { it == BadgeList.BLANK }
 
     inner class BadgeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -62,19 +61,15 @@ class BadgeAdapter(
     }
 
     override fun onBindViewHolder(holder: BadgeViewHolder, position: Int) {
-        // filteredBadgeList를 기준으로 onBindViewHolder 처리
         val currentItem = filteredBadgeList[position]
 
         holder.badge.text = currentItem.badge
         holder.badgeImg.setImageResource(currentItem.badgeImg)
 
-        // 뱃지 클릭 시 해당 뱃지 정보 전달
         holder.itemView.setOnClickListener {
             if (currentItem.isEarned) {
-                // 획득한 뱃지인 경우 대표 뱃지 변경 다이얼로그 표시
                 earnedBadgeClickListener.invoke(currentItem)
             } else {
-                // 획득하지 않은 뱃지인 경우 뱃지 팝업 표시
                 unearnedBadgeClickListener.invoke(currentItem)
             }
         }

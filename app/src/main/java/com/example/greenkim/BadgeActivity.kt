@@ -9,10 +9,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.LinkedList
+import java.util.Queue
 
 class BadgeActivity : AppCompatActivity() {
     //프로필 뱃지
-    private var profileBadgeList: List<BadgeList> = emptyList()
+    private var profileBadgeList: MutableList<BadgeList> = mutableListOf()
 
     //획득한 뱃지
     private val earnedBadgeList: List<BadgeList> = listOf(
@@ -20,6 +22,9 @@ class BadgeActivity : AppCompatActivity() {
         BadgeList.MENTEE.apply { isEarned = true },
         BadgeList.PLASTIC_3.apply { isEarned = true },
         BadgeList.GOLDEN_KIMGREEN.apply { isEarned = true },
+        BadgeList.YEONDU.apply { isEarned = true },
+        BadgeList.PLOGGING_3.apply { isEarned = true },
+        BadgeList.PLOGGING_10.apply { isEarned = true },
         BadgeList.EARLYBIRD.apply { isEarned = true }
     )
 
@@ -29,6 +34,9 @@ class BadgeActivity : AppCompatActivity() {
     // 어댑터 선언
     private lateinit var earnedAdapter: BadgeAdapter
     private lateinit var profileBadgeAdapter: BadgeAdapter
+
+    // 프로필 뱃지를 관리하는 큐
+    private val profileBadgeQueue: Queue<BadgeList> = LinkedList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +51,7 @@ class BadgeActivity : AppCompatActivity() {
         /// Profile Badge 설정
         val profileBadgeRecyclerView: RecyclerView = findViewById(R.id.profile_badge_recycler_view)
         profileBadgeRecyclerView.layoutManager = GridLayoutManager(this, 5)
-// isProfileBadge가 true로 설정된 뱃지를 필터링
+        // isProfileBadge가 true로 설정된 뱃지를 필터링
         val profileBadgeList = BadgeList.values().filter { it.isProfileBadge }
         profileBadgeAdapter = BadgeAdapter(profileBadgeList,
             { clickedBadge: BadgeList -> showChangeRepresentativeBadgeDialog(clickedBadge) },
@@ -51,7 +59,6 @@ class BadgeActivity : AppCompatActivity() {
         )
         profileBadgeRecyclerView.adapter = profileBadgeAdapter
         updateProfileBadgeList()
-
 
         // Earned Badge 설정
         val earnedBadgeRecyclerView: RecyclerView = findViewById(R.id.earned_badge_recycler_view)
@@ -73,7 +80,7 @@ class BadgeActivity : AppCompatActivity() {
     }
 
     // 대표 뱃지 변경 다이얼로그 표시 함수
-    fun showChangeRepresentativeBadgeDialog(badgeData: BadgeList) {
+    private fun showChangeRepresentativeBadgeDialog(badgeData: BadgeList) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("대표 뱃지 변경")
             .setMessage("대표 뱃지를 변경하시겠습니까?")
@@ -90,25 +97,34 @@ class BadgeActivity : AppCompatActivity() {
 
     // 프로필 뱃지 설정 함수
     private fun setProfileBadge(badgeData: BadgeList) {
-        // 프로필 뱃지로 설정
+        // 이미 isProfileBadge가 true인 경우 아무런 동작도 하지 않음
+        if (badgeData.isProfileBadge) {
+            return
+        }
+
+        // 새로운 뱃지를 큐에 추가
+        profileBadgeQueue.offer(badgeData)
         badgeData.isProfileBadge = true
 
-        // 리사이클러뷰 갱신
-        earnedAdapter.notifyDataSetChanged()
+        // 큐의 크기를 5개로 제한
+        if (profileBadgeQueue.size > 5) {
+            val removedBadge = profileBadgeQueue.poll()
+            removedBadge?.isProfileBadge = false
+        }
 
-        // Profile Badge RecyclerView 갱신
+        // RecyclerView 갱신
         updateProfileBadgeList()
     }
 
     // Profile Badge List 업데이트 함수
     private fun updateProfileBadgeList() {
-        // isProfileBadge가 true로 설정된 뱃지를 필터링하여 업데이트
-        profileBadgeList = BadgeList.values().filter { it.isProfileBadge }
+        // 큐에 있는 뱃지를 리스트로 변환하여 업데이트
+        profileBadgeList = profileBadgeQueue.toList().toMutableList()
         profileBadgeAdapter.updateBadgeList(profileBadgeList)
     }
 
     // 뱃지 정보를 받아 팝업창에 표시하는 함수
-    fun showBadgePopup(badgeData: BadgeList) {
+    private fun showBadgePopup(badgeData: BadgeList) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.badge_popup_layout)
 
