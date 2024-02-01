@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/Commu1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/nick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lineseed_kor_bold"
+                    android:text="얼리버드 김땡땡"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/commenter_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="1월 25일 14:36"
+                    android:layout_marginLeft="3dp"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_more_vert_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="3dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/contents"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="나는 문어. 꿈을 꾸는 문어. 안녕하세요 영화배우 이정재입니다제가 사랑하는 도시, 부산에 초대합니다"
+                    android:textSize="20sp"
+                    android:layout_margin="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right">
+
+                    <ImageView
+                        android:id="@+id/Like"
+                        android:layout_width="45dp"
+                        android:layout_height="38dp"
+                        android:src="@drawable/baseline_favorite_24"/>
+
+                    <TextView
+                        android:id="@+id/like_counts"
+                        android:layout_width="40dp"
+                        android:layout_height="38dp"
+                        android:text="[   ]"
+                        android:textSize="25sp" />
+
+                    <ImageView
+                        android:id="@+id/Chat"
+                        android:layout_width="45dp"
+                        android:layout_height="38dp"
+                        android:src="@drawable/baseline_chat_24"/>
+
+                    <TextView
+                        android:id="@+id/chat_counts"
+                        android:layout_width="40dp"
+                        android:layout_height="38dp"
+                        android:text="[   ]"
+                        android:textSize="25sp"
+                        android:layout_marginRight="5dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

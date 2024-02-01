@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeclareActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/UpFront"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/frog_pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/frog" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingStart="10dp"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                tools:ignore="SpeakableTextPresentCheck"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/baseline_search_24"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/UpFront">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Community" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proof Posts" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="10dp">
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Commu1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nick_name"
+                    android:layout_width="354dp"
+                    android:layout_height="54dp"
+
+                    android:paddingStart="5dp"
+                    android:paddingTop="10dp"
+                    android:text="얼리버드 김땡땡"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/profile_pic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="52dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="@+id/nick_name"
+                    app:layout_constraintHorizontal_bias="0.966"
+                    app:layout_constraintStart_toEndOf="@+id/profile_pic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:layout_width="379dp"
+                    android:layout_height="83dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nick_name">
+
+                    <TextView
+                        android:id="@+id/contents"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="나는 문어. 꿈을 꾸는 문어. 안녕하세요 영화배우 이정재입니다제가 사랑하는 도시, 부산에 초대합니다"
+                        android:textSize="20sp" />
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/Like"
+                    android:layout_width="45dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="156dp"
+                    android:src="@drawable/baseline_favorite_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/like_counts"
+                    android:layout_width="40dp"
+                    android:layout_height="38dp"
+                    android:text="[   ]"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/Like" />
+
+                <ImageView
+                    android:id="@+id/Chat"
+                    android:layout_width="45dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="60dp"
+                    android:src="@drawable/baseline_chat_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/like_counts" />
+
+                <TextView
+                    android:id="@+id/chat_counts"
+                    android:layout_width="40dp"
+                    android:layout_height="38dp"
+                    android:text="[   ]"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/Chat" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/three"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </LinearLayout>
+
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.919">
+
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+
+
+</LinearLayout>
