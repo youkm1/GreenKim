@@ -1,9 +1,11 @@
 package com.example.greenkim
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,7 +18,10 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import java.io.ByteArrayOutputStream
 
 class PostActivity : AppCompatActivity() {
 
@@ -25,12 +30,15 @@ class PostActivity : AppCompatActivity() {
 
     private val uploadedImages = mutableListOf<Uri>()
 
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 123
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
 
         val addImage = findViewById<ImageView>(R.id.add_image)
-        val imageContainer = findViewById<LinearLayout>(R.id.image_container)
 
         // 이미지뷰 클릭 이벤트 설정
         addImage.setOnClickListener {
@@ -77,7 +85,7 @@ class PostActivity : AppCompatActivity() {
         val options = arrayOf("갤러리에서 사진 가져오기", "사진 촬영 ")
 
         AlertDialog.Builder(this)
-            .setTitle("이미지 업로드 옵션")
+            .setTitle("이미지 업로드")
             .setItems(options) { _, which ->
                 when (which) {
                     0 -> openGallery()
@@ -91,6 +99,7 @@ class PostActivity : AppCompatActivity() {
     private fun openGallery() {
         val galleryIntent =
             Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST)
     }
 
@@ -117,7 +126,24 @@ class PostActivity : AppCompatActivity() {
 
                 TAKE_PICTURE_REQUEST -> {
                     // 카메라로 찍은 이미지 처리
-                    // (이 부분은 디바이스의 실제 파일 경로로 이미지를 처리하는 로직이 필요합니다)
+                    data?.data?.let { // Use the data directly if available
+                        uploadedImages.add(it)
+                        showUploadedImages()
+                    } ?: run {
+                        // If data is null, get the image from the extras
+                        val photo: Bitmap? = data?.extras?.get("data") as? Bitmap
+                        photo?.let {
+                            val imageUri = saveImage(it)
+                            uploadedImages.add(imageUri)
+                            showUploadedImages()
+                        } ?: run {
+                            Toast.makeText(
+                                this,
+                                "이미지를 가져오지 못했습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
         }
@@ -142,5 +168,17 @@ class PostActivity : AppCompatActivity() {
 
             imageContainer.addView(imageView)
         }
+    }
+
+    private fun saveImage(bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            contentResolver,
+            bitmap,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 }

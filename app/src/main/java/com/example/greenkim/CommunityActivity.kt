@@ -1,7 +1,10 @@
 package com.example.greenkim
 
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import com.example.greenkim.databinding.ActivityCommunityBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -17,10 +20,10 @@ class CommunityActivity : AppCompatActivity() {
 
         val fragmentList = listOf(CommunityFragment(), ConfirmationFragment())
 
-        val adapter_fragment = FragmentAdapter(this)
-        adapter_fragment.fragmentList = fragmentList
+        val adapterFragment = FragmentAdapter(this)
+        adapterFragment.fragmentList = fragmentList
 
-        binding.viewPager.adapter = adapter_fragment
+        binding.viewPager.adapter = adapterFragment
 
         val tabTitles = listOf<String>("Community", "Proof")
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -28,9 +31,17 @@ class CommunityActivity : AppCompatActivity() {
         }.attach()
 
         fragmentToLoad?.let {
-            if (it == "ComfirmationFragment") {
-                binding.viewPager.currentItem = 1
+            when (it) {
+                "ConfirmationFragment" -> binding.viewPager.currentItem = 1
+                "ProofFragment" -> binding.viewPager.currentItem = 2
             }
         }
+
+        val naviFragment = NaviFragment()
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, naviFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
     }
 }
