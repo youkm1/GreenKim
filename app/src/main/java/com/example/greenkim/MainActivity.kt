@@ -2,7 +2,6 @@ package com.example.greenkim
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -11,24 +10,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Menu
-import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Divider
@@ -47,7 +41,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -67,10 +60,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.greenkim.data.BottomNavigationItem
-
 import com.example.greenkim.ui.theme.GreenKimTheme
 import com.example.greenkim.ui.theme.lineKorFamily
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,32 +89,31 @@ fun MainScreen(modifier: Modifier = Modifier) {
         CommunitySection()
         Spacer(modifier = modifier.size(40.dp))
         ZeroTodoSection()
-        //bottomApp()
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun bottomApp() {
+    var context = LocalContext.current
     val items = listOf(
         BottomNavigationItem(
             title = "Home",
-            selectedIcon = Icons.Filled.Home,
+            selectedIcon = Icons.Filled.Home ,
             unselectedIcon = Icons.Outlined.Home,
             hasNews = false,
         ),
 
         BottomNavigationItem(
-            title = "Search",
-            selectedIcon = Icons.Filled.Menu,
-            unselectedIcon = Icons.Outlined.Menu,
+            title = "Community",
+            selectedIcon = Icons.Filled.Language,
+            unselectedIcon = Icons.Outlined.Language,
             hasNews = false,
         ),
         BottomNavigationItem(
             title = "MyPage",
-            selectedIcon = Icons.Filled.Person,
-            unselectedIcon = Icons.Outlined.Person,
+            selectedIcon = Icons.Filled.AccountCircle,
+            unselectedIcon = Icons.Outlined.AccountCircle,
             hasNews = true,
         ),
     )
@@ -132,6 +122,7 @@ fun bottomApp() {
     }
     val navController = rememberNavController()
     Scaffold(
+        containerColor = Color.White,
         bottomBar = {
             NavigationBar {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -171,17 +162,16 @@ fun bottomApp() {
                 }
             }
 
-        }   ) { innerPadding ->
+        }) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = "Home",
             Modifier.padding(innerPadding)
+
         ) {
-            //composable 안되는 일반 뷰 파일이면 인텐트 갈길거
-            composable("Home") {  }
-            composable("Event") {  }
-            composable("Search") {  }
-            composable("MyPage") {  }
+            composable("Home") { }
+            composable("Community") {  }
+            composable("MyPage") { }
         }
 
     }
@@ -279,12 +269,11 @@ fun ZeroTodoSection() {
     Column(
         Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
-
+            .background(Color.White)
     ) {
         Spacer(modifier = Modifier.size(15.dp))
         Row {
-            Text(text = "오늘의 제로웨이스트 활동", fontFamily = lineKorFamily, fontSize = 30.sp)
+            Text(text = "   오늘의 제로웨이스트 활동", fontFamily = lineKorFamily, fontSize = 30.sp)
             IconButton(
                 onClick =
                 {
@@ -304,8 +293,10 @@ fun ZeroTodoSection() {
             }
         }
         Spacer(modifier = Modifier.size(20.dp))
+
         ZeroActivities()
         bottomApp()
+
     }
 }
 
