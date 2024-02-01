@@ -1,6 +1,5 @@
 package com.example.greenkim
 
-import PostsAdapter
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
