@@ -32,16 +32,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val textView2: TextView = findViewById(R.id.textView2)
-        val switchView2: SwitchCompat = findViewById(R.id.switchView2)
 
-        switchView.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                textView1.text = "댓글 알림"
-            } else {
-                textView1.text = "댓글 알림"
-            }
-        }
 
 
         val testButton: Button = findViewById<Button>(R.id.button2)

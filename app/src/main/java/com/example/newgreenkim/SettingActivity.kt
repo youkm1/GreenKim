@@ -6,10 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
+import android.provider.MediaStore
 
 class SettingActivity : AppCompatActivity() {
+
+    companion object {
+        const val PICK_IMAGE_REQUEST = 1
+    }
+
+    private lateinit var imageView7: ImageView
 
 
 
@@ -17,6 +25,23 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting);
+
+        imageView7 = findViewById(R.id.imageView7)
+        imageView7.setOnClickListener {
+            openGallery()
+        }
+
+
+
+
+
+        val imageView = findViewById<ImageView>(R.id.imageView2)
+
+        imageView.setOnClickListener{
+            PopupActivity()
+        }
+
+
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -38,16 +63,7 @@ class SettingActivity : AppCompatActivity() {
             }
         }
 
-        val textView2: TextView = findViewById(R.id.textView2)
-        val switchView2: SwitchCompat = findViewById(R.id.switchView2)
 
-        switchView.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                textView1.text = "좋아요 알림"
-            } else {
-                textView1.text = "좋아요 알림"
-            }
-        }
 
 
 
@@ -77,11 +93,22 @@ class SettingActivity : AppCompatActivity() {
 
 
 
-
-
-
-
     }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == -1 && data != null) {
+            val selectedImageUri = data.data
+            imageView7.setImageURI(selectedImageUri)
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             android.R.id.home -> {
