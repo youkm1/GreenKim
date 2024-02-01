@@ -38,10 +38,15 @@ class CommunityActivity : AppCompatActivity() {
         }
 
         val naviFragment = NaviFragment()
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, naviFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, naviFragment)
+            .commit()
+    }
 
+    fun updateLanguageButtonColor(languageButton: ImageButton) {
+        languageButton.setColorFilter(
+            Color.parseColor("#288156"),
+            android.graphics.PorterDuff.Mode.SRC_IN
+        )
     }
 }
