@@ -105,8 +105,20 @@ class PostActivity : AppCompatActivity() {
 
     // 카메라 열기
     private fun openCamera() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(takePictureIntent, TAKE_PICTURE_REQUEST)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, TAKE_PICTURE_REQUEST)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                REQUEST_CAMERA_PERMISSION
+            )
+        }
     }
 
     // 갤러리 또는 카메라 선택 결과 처리
@@ -144,6 +156,7 @@ class PostActivity : AppCompatActivity() {
                             ).show()
                         }
                     }
+
                 }
             }
         }

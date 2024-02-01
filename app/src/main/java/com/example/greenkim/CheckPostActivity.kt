@@ -1,8 +1,10 @@
 package com.example.greenkim
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -16,6 +18,8 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import java.io.ByteArrayOutputStream
 
@@ -25,6 +29,10 @@ class CheckPostActivity : AppCompatActivity() {
     private val TAKE_PICTURE_REQUEST = 2
 
     private val uploadedImages = mutableListOf<Uri>()
+
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 123
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +60,6 @@ class CheckPostActivity : AppCompatActivity() {
             boardSpinner.setSelection(position)
         }
 
-
         // 드롭다운 메뉴 선택 이벤트
         boardSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -77,7 +84,7 @@ class CheckPostActivity : AppCompatActivity() {
             // 데이터 서버로 넘기는 로직 필요
 
             finish()
-            Toast.makeText(this,"완료되었습니다!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "완료되었습니다!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -106,8 +113,20 @@ class CheckPostActivity : AppCompatActivity() {
 
     // 카메라 열기
     private fun openCamera() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(takePictureIntent, TAKE_PICTURE_REQUEST)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, TAKE_PICTURE_REQUEST)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                REQUEST_CAMERA_PERMISSION
+            )
+        }
     }
 
     // 갤러리 또는 카메라 선택 결과 처리
