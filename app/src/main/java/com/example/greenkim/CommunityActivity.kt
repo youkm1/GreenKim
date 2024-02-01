@@ -31,16 +31,22 @@ class CommunityActivity : AppCompatActivity() {
         }.attach()
 
         fragmentToLoad?.let {
-            if (it == "ComfirmationFragment") {
-                binding.viewPager.currentItem = 1
+            when (it) {
+                "ConfirmationFragment" -> binding.viewPager.currentItem = 1
+                "ProofFragment" -> binding.viewPager.currentItem = 2
             }
         }
 
         val naviFragment = NaviFragment()
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, naviFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, naviFragment)
+            .commit()
+    }
 
+    fun updateLanguageButtonColor(languageButton: ImageButton) {
+        languageButton.setColorFilter(
+            Color.parseColor("#288156"),
+            android.graphics.PorterDuff.Mode.SRC_IN
+        )
     }
 }

@@ -43,6 +43,16 @@ class ConfirmationFragment : Fragment() {
         val postList = getPosts()
         val adapter = PostsAdapter()
         adapter.listData = postList
+
+        adapter.onPostItemClickListener = object : PostsAdapter.OnPostItemClickListener {
+            override fun onPostItemClick(post: posts) {
+                // Open DetailPostActivity when a post is clicked
+                val intent = Intent(requireContext(), DetailPostActivity::class.java)
+                intent.putExtra("selectedPost", post)
+                startActivity(intent)
+            }
+        }
+
         binding.recyclerview.adapter =adapter
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
 

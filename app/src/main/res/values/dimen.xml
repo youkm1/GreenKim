@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 이미지를 나열할 LinearLayout의 높이 -->
     <dimen name="image_container_height">100dp</dimen>

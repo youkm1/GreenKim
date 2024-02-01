@@ -1,8 +1,11 @@
 package com.example.greenkim
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,7 +18,10 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import java.io.ByteArrayOutputStream
 
 class CheckPostActivity : AppCompatActivity() {
 
@@ -24,12 +30,15 @@ class CheckPostActivity : AppCompatActivity() {
 
     private val uploadedImages = mutableListOf<Uri>()
 
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 123
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_post)
 
         val addImage = findViewById<ImageView>(R.id.add_image)
-        val imageContainer = findViewById<LinearLayout>(R.id.image_container)
 
         // 이미지뷰 클릭 이벤트 설정
         addImage.setOnClickListener {
@@ -50,7 +59,6 @@ class CheckPostActivity : AppCompatActivity() {
             // Set the Spinner selection
             boardSpinner.setSelection(position)
         }
-
 
         // 드롭다운 메뉴 선택 이벤트
         boardSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -76,7 +84,7 @@ class CheckPostActivity : AppCompatActivity() {
             // 데이터 서버로 넘기는 로직 필요
 
             finish()
-            Toast.makeText(this,"완료되었습니다!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "완료되었습니다!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -105,8 +113,20 @@ class CheckPostActivity : AppCompatActivity() {
 
     // 카메라 열기
     private fun openCamera() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(takePictureIntent, TAKE_PICTURE_REQUEST)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, TAKE_PICTURE_REQUEST)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                REQUEST_CAMERA_PERMISSION
+            )
+        }
     }
 
     // 갤러리 또는 카메라 선택 결과 처리
@@ -126,7 +146,24 @@ class CheckPostActivity : AppCompatActivity() {
 
                 TAKE_PICTURE_REQUEST -> {
                     // 카메라로 찍은 이미지 처리
-                    // (이 부분은 디바이스의 실제 파일 경로로 이미지를 처리하는 로직이 필요합니다)
+                    data?.data?.let { // Use the data directly if available
+                        uploadedImages.add(it)
+                        showUploadedImages()
+                    } ?: run {
+                        // If data is null, get the image from the extras
+                        val photo: Bitmap? = data?.extras?.get("data") as? Bitmap
+                        photo?.let {
+                            val imageUri = saveImage(it)
+                            uploadedImages.add(imageUri)
+                            showUploadedImages()
+                        } ?: run {
+                            Toast.makeText(
+                                this,
+                                "이미지를 가져오지 못했습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
         }
@@ -151,5 +188,17 @@ class CheckPostActivity : AppCompatActivity() {
 
             imageContainer.addView(imageView)
         }
+    }
+
+    private fun saveImage(bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            contentResolver,
+            bitmap,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 }
