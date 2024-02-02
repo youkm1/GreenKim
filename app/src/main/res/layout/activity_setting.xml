@@ -16,7 +16,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="환경설정" />
+        app:title="마이페이지" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
                             android:layout_marginTop="25dp"
-                            android:text="환경지킴이"
+                            android:text="프로기타리스트"
                             android:textColor="#1B1A1A"
                             android:textSize="21dp"
                             android:textStyle="bold" />
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
                             android:layout_marginTop="1dp"
-                            android:text="채영  님"
+                            android:text="송이  님"
                             android:textColor="#1B1A1A"
                             android:textSize="21dp"
                             android:textStyle="bold" />

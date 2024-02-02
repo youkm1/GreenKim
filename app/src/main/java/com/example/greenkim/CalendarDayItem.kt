@@ -1,7 +1,8 @@
-package com.example.newgreenkim
+package com.example.greenkim
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.newgreenkim.R
 
 class CalendarDayItem : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
