@@ -11,29 +11,28 @@ import androidx.fragment.app.Fragment
 
 class NaviFragment : Fragment() {
 
+    private lateinit var languageButton: ImageButton
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // 레이아웃 초기화
         val view = inflater.inflate(R.layout.fragment_navi, container, false)
 
+        // 홈, 언어, 계정 버튼 가져오기
         val homeButton: ImageButton = view.findViewById(R.id.button_home)
         val languageButton: ImageButton = view.findViewById(R.id.button_language)
-        val accountButton: ImageButton = view.findViewById(R.id.button_account)
 
-        // 현재 액티비티를 확인
+        // 현재 액티비티 가져오기
         val currentActivity = activity
 
-//        // MainActivity에 있을 때 button_home의 색상을 변경
-//        if (currentActivity is MainActivity) {
-//            homeButton.setColorFilter(Color.parseColor("#288156"), android.graphics.PorterDuff.Mode.SRC_IN)
-//        }
-
-        // CommunityActivity에 있을 때 button_language의 색상을 변경
+        // 만약 현재 액티비티가 CommunityActivity이면 언어 버튼 색상 업데이트
         if (currentActivity is CommunityActivity) {
-            languageButton.setColorFilter(Color.parseColor("#288156"), android.graphics.PorterDuff.Mode.SRC_IN)
+            currentActivity.updateLanguageButtonColor(languageButton)
         }
 
+        // 홈 버튼 클릭 이벤트 처리
         homeButton.setOnClickListener {
             val intent = Intent(activity, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -41,6 +40,7 @@ class NaviFragment : Fragment() {
             activity?.overridePendingTransition(0, 0)
         }
 
+        // 언어 버튼 클릭 이벤트 처리
         languageButton.setOnClickListener {
             val intent = Intent(activity, CommunityActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -48,8 +48,17 @@ class NaviFragment : Fragment() {
             activity?.overridePendingTransition(0, 0)
         }
 
-        // 마지막 이미지는 클릭 이벤트를 냅둠
-
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (::languageButton.isInitialized) {
+            val currentActivity = activity
+            if (currentActivity is CommunityActivity) {
+                currentActivity.updateLanguageButtonColor(languageButton)
+            }
+        }
     }
 }

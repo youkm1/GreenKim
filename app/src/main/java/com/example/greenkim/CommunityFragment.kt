@@ -52,13 +52,18 @@ class CommunityFragment : Fragment() {
         val postList = getPosts()
         val adapter = PostsAdapter()
         adapter.listData = postList
-        binding.recyclerview.adapter =adapter
+        adapter.onPostItemClickListener = object : PostsAdapter.OnPostItemClickListener {
+            override fun onPostItemClick(post: posts) {
+                val intent = Intent(requireContext(), DetailPostActivity::class.java)
+                intent.putExtra("postId", post.no)
+                startActivity(intent)
+            }
+        }
+        binding.recyclerview.adapter = adapter
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
 
         return binding.root
-
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
