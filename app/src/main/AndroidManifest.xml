@@ -41,6 +41,9 @@
             android:parentActivityName=".SettingActivity" /> <!-- 다른 activity 엘리먼트들도 마찬가지로 수정 -->
         <activity
             android:name=".SettingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
