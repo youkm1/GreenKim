@@ -8,6 +8,7 @@ class App:Application() {
     }
 
     override fun onCreate() {
+
         prefs = Prefs(applicationContext)
         super.onCreate()
     }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="70dp">
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -57,5 +57,10 @@
         android:background="#000000"
         android:layout_below="@id/button_home"
         tools:ignore="NotSibling" />
+        -->
+  <androidx.compose.ui.platform.ComposeView
+      android:id="@+id/compose_navi"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
 
 </RelativeLayout>

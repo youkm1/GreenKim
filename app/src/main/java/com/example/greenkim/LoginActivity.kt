@@ -2,11 +2,20 @@ package com.example.greenkim
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.greenkim.api.auth.App
+import com.example.greenkim.api.auth.AuthApiService
+import com.example.greenkim.api.auth.DTO.Login.LoginRequestDto
+import com.example.greenkim.api.auth.DTO.Login.LoginResponseDto
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
@@ -25,6 +34,34 @@ class LoginActivity : AppCompatActivity() {
         passwordEditText = findViewById(R.id.password_edit_text)
         signinErrorMessage = findViewById(R.id.signin_error_message)
 
+        fun loginService(email: String, password: String) {
+            val loginService = AuthApiService.create()
+
+            loginService.logIn(LoginRequestDto(email,password))
+                .enqueue(object : Callback<LoginResponseDto> {
+                    override fun onResponse(
+                        call: Call<LoginResponseDto>,
+                        response: Response<LoginResponseDto>
+                    ) {
+                        if (response.isSuccessful) {
+                            val loginResponse = response.body() ?: return
+
+                            //save token
+                            App.prefs.token = loginResponse.data.accessToken
+
+                            //get token
+                            //val token = App.prefs.token
+
+                        } else{
+                            Log.v("fail!!","fail")
+                        }
+                    }
+                    override fun onFailure(call: Call<LoginResponseDto>, t: Throwable) {
+                        Log.d("f!!", t.localizedMessage!!.toString())
+                        Toast.makeText(this@LoginActivity, "server X", Toast.LENGTH_SHORT).show()
+                    }
+                })
+        }
         loginButton.setOnClickListener {
             val id = idEditText.text.toString()
             val password = passwordEditText.text.toString()
@@ -34,21 +71,15 @@ class LoginActivity : AppCompatActivity() {
                 showErrorMessage("아이디를 입력해주세요.")
                 return@setOnClickListener
             }
-
             if (password.isEmpty()) {
                 showErrorMessage("비밀번호를 입력해주세요.")
                 return@setOnClickListener
             }
-
-            // 로그인 로직 구현 필요
-            // 아이디 없음, 비밀번호 불일치
-
-            // 일단 로그인 성공 후 MainActivity로 이동
-            val intent = Intent(this, MainActivity::class.java)
+            loginService(id,password)
+            val intent = Intent(this, setgetActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
-
         signupButton.setOnClickListener {
             // SignUpActivity로 이동
             val intent = Intent(this, SignUpActivity::class.java)

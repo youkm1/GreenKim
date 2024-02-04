@@ -7,7 +7,7 @@ import okhttp3.Response
 class InterCeptor:Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val req =
-            chain.request().newBuilder().addHeader("Authorization", App.prefs.token ?: "").build()
+            chain.request().newBuilder().addHeader("accessToken", App.prefs.token ?: "").build()
         return chain.proceed(req)
     }
 

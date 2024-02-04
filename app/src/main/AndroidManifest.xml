@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- 이미지 업로드를 위해 갤러리, 카메라 권한 설정 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
+        android:name=".api.auth.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GreenKim"
         tools:targetApi="31">
-        <activity
 
+
+        <activity
             android:name=".CalendarActivity"
             android:exported="true"
             android:label="@string/title_activity_calendar"
-            android:theme="@style/Theme.GreenKim">
-
-
-        </activity>
-
+            android:theme="@style/Theme.GreenKim" />
+        <activity
             android:name=".DetailPostActivity"
             android:exported="true" />
-
-
         <activity
             android:name=".CommunityActivity"
             android:exported="true"
@@ -48,22 +50,17 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.GreenKim">
 
-
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.GreenKim">
+            android:theme="@style/Theme.GreenKim" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".PostActivity"
@@ -71,7 +68,12 @@
         <activity
             android:name=".CheckPostActivity"
             android:exported="true" />
+        <activity
+            android:name=".setgetActivity"
+            android:exported="true"
+            android:theme="@style/Theme.GreenKim">
 
+        </activity>
     </application>
 
 </manifest>
