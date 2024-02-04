@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/intro2"
+    android:background="#42A154">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="650sp"
+            android:orientation="vertical"
+            android:background="@drawable/bottom_rounded_shape">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="단계별 제로웨이스트\n실천 방법"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:gravity="center"
+                android:paddingTop="50sp"
+                android:textColor="#3A8E66"
+                android:fontFamily="@font/lineseed_kor_bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.제로에서 출발한다면"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#3A8E66"
+                    android:paddingTop="10dp"
+                    android:fontFamily="@font/lineseed_kor_rg"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="꼭 필요하지 않은 물건을 하루에 하나씩만 줄여 보아요."
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/lineseed_kor_rg"
+                    android:paddingTop="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/intro2_check"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="카페에서 빨대 없이 음료 마시기"
+                        android:textColor="#000000"
+                        android:paddingLeft="5dp"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/lineseed_kor_rg"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.하나 더 줄여보고 싶다면"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#3A8E66"
+                    android:paddingTop="20dp"
+                    android:fontFamily="@font/lineseed_kor_rg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="무심코 발생하는 쓰레기를 줄일 수 있는 준비물을 챙겨 보아요."
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/lineseed_kor_rg"
+                    android:paddingTop="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/intro2_check"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="손수건 가지고 다니기"
+                        android:textColor="#000000"
+                        android:paddingLeft="5dp"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/lineseed_kor_rg"/>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3.텀블러에서 한걸음 나아가고 싶다면"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#3A8E66"
+                    android:paddingTop="20dp"
+                    android:fontFamily="@font/lineseed_kor_rg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="쉬울 것 같지만 은근히 놓치고 있는 방법들에 좀 더 적극적으로 도전해 보아요"
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/lineseed_kor_rg"
+                    android:paddingTop="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/intro2_check"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="집에서 물 끓여 마시기"
+                        android:textColor="#000000"
+                        android:paddingLeft="5dp"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/lineseed_kor_rg"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="0dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked_btn"
+                android:layout_gravity="center"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/checked_btn"
+                android:layout_gravity="center"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked_btn"
+                android:layout_gravity="center"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked_btn"
+                android:layout_gravity="center"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked_btn"
+                android:layout_gravity="center"
+                android:padding="3dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
