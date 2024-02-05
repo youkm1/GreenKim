@@ -6,13 +6,16 @@ import com.example.greenkim.api.auth.DTO.Refresh.RefreshRequestDto
 import com.example.greenkim.api.auth.DTO.Refresh.RefreshResponseDto
 import com.example.greenkim.api.auth.DTO.Signup.SignUpRequestDto
 import com.example.greenkim.api.auth.DTO.Signup.SignUpResponseDto
+import com.example.greenkim.api.member.DTO.profile.AllSettingResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
@@ -35,15 +38,20 @@ interface AuthApiService {
     @POST("auth/logout")
     fun logOut(): Call<LoginResponseDto>
 
+    @Headers("Content-Type: application/json")
+    @GET("/member")
+    fun getSetting():Call<AllSettingResponseDto>
+
     companion object {
         private const val BASE_URL = "http://13.237.86.105:8080/"
         fun create(): AuthApiService {
             val gson:Gson = GsonBuilder().setLenient().create()
-            /*val interceptor = HttpLoggingInterceptor().apply {
+            val interceptor = HttpLoggingInterceptor().apply {
                 this.level = HttpLoggingInterceptor.Level.BODY
-            }*/
+            }
             val client= OkHttpClient.Builder()
                 .addInterceptor(InterCeptor())
+                .addInterceptor(interceptor)
                 .build()
 
             return Retrofit.Builder()
